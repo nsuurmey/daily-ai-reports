@@ -30,10 +30,10 @@ script:
 
 tts:
   voice_id: "eR40ATw9ArzDf9h3v7t7"
-  # eleven_flash_v2_5 = 1 credit per character (cheapest). Try
-  # eleven_multilingual_v2 on one episode for higher quality (about 2x on some plans).
-  model_id: eleven_flash_v2_5
-  cost_multiplier: 1.0             # credits per character for the chosen model
+  # eleven_multilingual_v2 chosen after listening to both (better quality).
+  # eleven_flash_v2_5 is the cheaper fallback (1 credit per character).
+  model_id: eleven_multilingual_v2
+  cost_multiplier: 2.0             # conservative; lower to 1.0 once confirmed (see README)
   stability: 0.5
   similarity_boost: 0.75
   output_format: mp3_44100_128
