@@ -20,6 +20,8 @@ def parse_args(argv=None):
     p.add_argument("--dry-run", action="store_true", help="print script + show notes; no audio, no publishing")
     p.add_argument("--check-budget", action="store_true", help="show remaining ElevenLabs credits and exit")
     p.add_argument("--out-dir", default="out", help="where to write the MP3 (default: out/)")
+    p.add_argument("--model", help="override tts.model_id for this run (e.g. eleven_multilingual_v2)")
+    p.add_argument("--cost-multiplier", type=float, help="override tts.cost_multiplier for this run")
     p.add_argument("--config", help="path to config.yaml")
     p.add_argument("--from-json", help="read items from a JSON file instead of Notion (offline testing)")
     return p.parse_args(argv)
@@ -68,7 +70,11 @@ def main(argv=None) -> int:
     if not key:
         print("ELEVENLABS_API_KEY is not set (put it in .env or the environment).", file=sys.stderr)
         return 2
-    t = cfg["tts"]
+    t = dict(cfg["tts"])
+    if args.model:
+        t["model_id"] = args.model
+    if args.cost_multiplier:
+        t["cost_multiplier"] = args.cost_multiplier
     remaining, _ = tts.remaining_credits(key)
     try:
         needed = tts.check_budget(script, remaining, t["cost_multiplier"], t["budget_margin"])
@@ -78,7 +84,8 @@ def main(argv=None) -> int:
     audio = tts.synthesize(script, t, key)
     out = Path(args.out_dir)
     out.mkdir(parents=True, exist_ok=True)
-    path = out / f"{date.isoformat()}.mp3"
+    suffix = f"-{args.model}" if args.model else ""
+    path = out / f"{date.isoformat()}{suffix}.mp3"
     path.write_bytes(audio)
     after, _ = tts.remaining_credits(key)
     print(f"Wrote {path} ({len(audio) / 1e6:.2f} MB)")
