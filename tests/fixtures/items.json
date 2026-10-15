@@ -1,0 +1,9 @@
+[
+  {"insight": "Anthropic ships **prompt caching** for the Batch API", "type": "Tooling", "evidence": "Vendor docs", "domain": "Cost optimization",
+   "brief_text": "Cached prefixes now work inside batch jobs, cutting repeat-input cost ~50% vs. uncached runs, e.g. for RAG pipelines. See [the docs](https://example.com/docs) or https://example.com/x for details.",
+   "source": "https://example.com/docs?a=1&b=2", "page_id": "p1"},
+  {"insight": "A study finds LLM judges drift w/ long contexts.", "type": "Research", "evidence": "Peer-reviewed", "domain": "Evaluation",
+   "brief_text": "Agreement with humans fell 12% past 32k tokens.", "source": "https://example.com/paper", "page_id": "p2"},
+  {"insight": "Open-weights coder model tops SWE-bench", "type": "Release", "evidence": "Independent benchmark", "domain": "Coding agents",
+   "brief_text": "It runs on a single GPU.", "source": "", "page_id": "p3"}
+]

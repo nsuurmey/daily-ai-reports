@@ -1,0 +1,36 @@
+# Everything you might want to tweak lives here.
+
+timezone: America/Denver
+
+notion:
+  # Notion API version. 2025-09-03 introduced "data sources"; if your
+  # workspace still uses the database endpoint, set query_mode: database
+  # and a version such as 2022-06-28.
+  api_version: "2025-09-03"
+  query_mode: data_source          # data_source | database
+  database_id: "334d7dfa82824668b5cc608c7a8b6a67"
+  data_source_id: "f6ef81a5-4a62-40eb-b588-ac8889aa11f1"
+  # Property names in the "GenAI Daily Brief Log" database.
+  properties:
+    date: Date
+    insight: Insight
+    type: Type
+    evidence: Evidence
+    domain: Domain
+    brief_text: Brief text
+    source: Source
+
+script:
+  # break_tag: insert <break time="1.5s" /> between items (Flash/Turbo-class models).
+  # paragraph: use a blank line instead (safe for any model).
+  pause_style: break_tag
+  pause_seconds: 1.5
+  intro_template: "GenAI brief for {weekday}, {month} {day_ordinal}. {count_phrase}"
+  outro: "That's the brief. Sources are in the show notes."
+
+# Used from Phase 2 onward.
+tts:
+  voice_id: ""                     # copy from the ElevenLabs Voice Library
+  model_id: eleven_flash_v2_5      # 1 credit per character; keeps you in budget
+  stability: 0.5
+  similarity_boost: 0.75
