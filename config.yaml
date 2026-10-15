@@ -39,3 +39,14 @@ tts:
   output_format: mp3_44100_128
   max_chars_per_request: 9000      # script is split on item boundaries above this
   budget_margin: 1.1               # refuse to run unless credits >= chars x cost x this
+
+publish:
+  repo: nsuurmey/daily-ai-reports            # where the gh-pages branch lives
+  branch: gh-pages
+  base_url: https://nsuurmey.github.io/daily-ai-reports/
+  title: GenAI Daily Brief
+  author: Nate
+  description: A daily audio read-through of practical, non-hype GenAI news.
+  language: en-us
+  keep_episodes: 30
+  cover: assets/cover.png
