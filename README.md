@@ -1,7 +1,7 @@
 # GenAI Daily Brief → Private Podcast
 
 Turns each day's GenAI brief (logged in Notion) into a podcast episode.
-See the PRD for the full plan. **Status: Phase 1 (fetch + script, no audio).**
+See the PRD for the full plan. **Status: Phase 2 (audio) built; feed + automation still to come.**
 
 ## Try it
 
@@ -28,3 +28,13 @@ source" error, switch `notion.query_mode` / `api_version` there.
 
 ## Tests
 `.venv/bin/pytest`
+
+## Making audio (spends ElevenLabs credits)
+```bash
+.venv/bin/python -m brief --check-budget            # free: shows remaining credits
+.venv/bin/python -m brief --date 2026-10-16         # writes out/2026-10-16.mp3
+```
+The run stops, without spending anything, if the credits left are less than the
+script length x the model's cost x 1.1. Change the voice or model in
+`config.yaml` (`tts.voice_id`, `tts.model_id`, `tts.cost_multiplier`).
+Your ElevenLabs key needs *Text to Speech: Access* and *User: Read*.

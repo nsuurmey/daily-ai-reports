@@ -28,9 +28,14 @@ script:
   intro_template: "GenAI brief for {weekday}, {month} {day_ordinal}. {count_phrase}"
   outro: "That's the brief. Sources are in the show notes."
 
-# Used from Phase 2 onward.
 tts:
-  voice_id: ""                     # copy from the ElevenLabs Voice Library
-  model_id: eleven_flash_v2_5      # 1 credit per character; keeps you in budget
+  voice_id: "eR40ATw9ArzDf9h3v7t7"
+  # eleven_flash_v2_5 = 1 credit per character (cheapest). Try
+  # eleven_multilingual_v2 on one episode for higher quality (about 2x on some plans).
+  model_id: eleven_flash_v2_5
+  cost_multiplier: 1.0             # credits per character for the chosen model
   stability: 0.5
   similarity_boost: 0.75
+  output_format: mp3_44100_128
+  max_chars_per_request: 9000      # script is split on item boundaries above this
+  budget_margin: 1.1               # refuse to run unless credits >= chars x cost x this
